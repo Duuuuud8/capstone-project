@@ -1,0 +1,133 @@
+Tech Stack
+-MERN Stack, MongoDB, Express, React, Node.js
+
+Additional Technologies
+-HTML, CSS, JavaScript
+-Responsive web design
+-Render for backend deployment
+-Vercel or Netlify for frontend hosting
+
+Project Focus
+-Evenly focused full-stack application
+-Backend manages authentication, user data, and API communication
+-Frontend displays artists, events, and allows users to interact with the app
+-Goal is to combine backend data management with a clean user interface
+
+Project Type
+-Responsive website
+-Accessible on desktop browsers
+-Accessible on mobile browsers (Android and iOS)
+
+Project Goal
+-Help users discover concerts and live events based on the artists they follow
+-Allow users to import or manually add artists they follow
+-Display concerts and events near their location
+-Allow travel plans to be included(venues/events near your destination)
+-Allow users to save events they want to attend
+-Provide similar functionality to existing concert discovery apps but support platforms like SoundCloud and Bandcamp
+
+User Demographic
+-Music fans who attend concerts regularly
+-Users of independent music platforms such as SoundCloud and Bandcamp
+-Fans of underground or smaller artists
+-Anyone interested in discovering concerts happening near them
+
+Data and APIs
+-External APIs will provide concert and artist data
+-Bandsintown API will likely be used for concert and event information
+-SoundCloud API may be used to retrieve artist information
+-Data returned from APIs may include artist names, event dates, venue information, locations, and ticket links
+
+Bandcamp Data Considerations
+-Bandcamp does not provide a public API
+-Possible solutions include alternative APIs, limited scraping, or allowing users to manually add artists
+
+== Database Schema ==
+
+Users
+-Username
+-Email
+-Password (hashed)
+-FollowedArtists
+-SavedEvents
+
+Artists
+-ArtistName
+-PlatformSource
+-ExternalAPIid
+
+Events
+-Artist
+-Venue
+-Location
+-Date
+-TicketLink
+
+Venues
+-VenueName
+-City
+-State
+-Location
+
+Saved Events
+-UserId
+-EventId
+
+Authentication
+-User signup
+-User login
+-Password hashing using bcrypt
+-JWT authentication for secure sessions
+
+Potential API Issues
+-API rate limits
+-Limited access to certain data
+-Changes in API structure
+-Lack of official API support for Bandcamp
+
+Sensitive Information
+-User login credentials will be stored
+-Passwords will be hashed using bcrypt
+-Authentication sessions will be managed using JWT tokens
+-No payment or financial data will be collected
+
+== Core Functionality ==
+
+User Accounts
+-User signup
+-User login
+-Secure authentication
+
+Artist Tracking
+-Import artists from supported APIs
+-Manually add artists
+-Manage followed artists
+
+Concert Discovery
+-View upcoming concerts
+-Filter concerts by location
+-Search artists
+
+Event Management
+-Save events
+-Remove saved events
+
+Search
+-Search artists
+-Search concerts
+
+User Flow
+-User visits the landing page
+-User signs up or logs into their account
+-User imports or manually adds artists they follow
+-The application retrieves upcoming concerts from external APIs
+-The user views concerts happening near them
+-The user saves events they want to attend
+-The user manages followed artists and saved events
+
+Stretch Goals
+-Support additional music platforms
+-Include music festivals
+-Include smaller venues and local shows
+-Notify users when new concerts are announced
+-Notify users when followed artists release new music
