@@ -1,133 +1,152 @@
 Tech Stack
--MERN Stack, MongoDB, Express, React, Node.js
+MongoDB (database)
+Express.js (backend framework)
+React (frontend)
+Node.js (server environment)
+HTML, CSS, JavaScript
 
-Additional Technologies
--HTML, CSS, JavaScript
--Responsive web design
--Render for backend deployment
--Vercel or Netlify for frontend hosting
+Additional Tools:
 
-Project Focus
--Evenly focused full-stack application
--Backend manages authentication, user data, and API communication
--Frontend displays artists, events, and allows users to interact with the app
--Goal is to combine backend data management with a clean user interface
+JWT (authentication)
+bcrypt (password hashing)
+Giphy API (for GIF search and embedding)
+Focus
 
-Project Type
--Responsive website
--Accessible on desktop browsers
--Accessible on mobile browsers (Android and iOS)
+This will be an evenly focused full-stack application.
 
-Project Goal
--Help users discover concerts and live events based on the artists they follow
--Allow users to import or manually add artists they follow
--Display concerts and events near their location
--Allow travel plans to be included(venues/events near your destination)
--Allow users to save events they want to attend
--Provide similar functionality to existing concert discovery apps but support platforms like SoundCloud and Bandcamp
+The backend will handle user authentication, note storage, and API routes
+The frontend will allow users to create, edit, and manage notes in a clean interface
+Type
+Responsive web application
+Accessible on desktop and mobile browsers
+Goal
 
-User Demographic
--Music fans who attend concerts regularly
--Users of independent music platforms such as SoundCloud and Bandcamp
--Fans of underground or smaller artists
--Anyone interested in discovering concerts happening near them
+The goal of this project is to build a note-taking application that allows users to:
 
-Data and APIs
--External APIs will provide concert and artist data
--Bandsintown API will likely be used for concert and event information
--SoundCloud API may be used to retrieve artist information
--Data returned from APIs may include artist names, event dates, venue information, locations, and ticket links
+Create and store notes tied to their account
+Access their notes from any device through login
+Share notes with other users using different permission levels
+Enhance notes using Markdown formatting
+Add GIFs to notes to represent tone, mood, or emphasis
 
-Bandcamp Data Considerations
--Bandcamp does not provide a public API
--Possible solutions include alternative APIs, limited scraping, or allowing users to manually add artists
-
-== Database Schema ==
+This project is designed to be a more flexible and expressive alternative to basic notes apps.
 
 Users
--Username
--Email
--Password (hashed)
--FollowedArtists
--SavedEvents
+Students taking notes
+Individuals organizing tasks or lists
+Users who want access to notes across multiple devices
+Users who want simple collaboration without complex tools
+Data
 
-Artists
--ArtistName
--PlatformSource
--ExternalAPIid
+This project will use:
 
-Events
--Artist
--Venue
--Location
--Date
--TicketLink
+1. Custom-built API (Primary)
 
-Venues
--VenueName
--City
--State
--Location
+The backend will be built using Express and MongoDB to manage:
 
-Saved Events
--UserId
--EventId
+Users
+Notes
+Shared note access
+2. External API
 
-Authentication
--User signup
--User login
--Password hashing using bcrypt
--JWT authentication for secure sessions
+The app will integrate the Giphy API to:
 
-Potential API Issues
--API rate limits
--Limited access to certain data
--Changes in API structure
--Lack of official API support for Bandcamp
+Search for GIFs
+Allow users to attach GIFs to notes
+Data stored will include:
+User account information (username, email, password)
+Notes (title, content, formatting)
+Shared permissions
+GIF URLs attached to notes
 
+-----Database Schema (Basic)
+Users
+    username
+    email
+    password (hashed)
+Notes
+    title
+    content (text/markdown)
+    owner (user id)
+SharedNotes (/ permissions)
+    note_id
+    user_id
+    permission (view or edit)
+NoteGIFs (simple approach?)
+    note_id
+    gif_url
+
+
+-------Authentication
+User signup and login
+Passwords hashed using bcrypt
+JWT used for authentication
+Potential Issues
+Managing permissions for shared notes
+Handling API requests to Giphy (rate limits or errors)
+Ensuring notes save correctly with formatting
+Avoiding overly complex features that slow development
 Sensitive Information
--User login credentials will be stored
--Passwords will be hashed using bcrypt
--Authentication sessions will be managed using JWT tokens
--No payment or financial data will be collected
+User passwords will be securely hashed
+Authentication handled using JWT
+No financial or highly sensitive personal data will be stored
 
-== Core Functionality ==
-
+-----Core Functionality
 User Accounts
--User signup
--User login
--Secure authentication
+Register
+Login
+Logout
+Notes
+Create notes
+Edit notes
+Delete notes
+View notes
+Sharing
+Share notes with another user
+Set permission (view or edit)
+Markdown Support
+Allow basic formatted text (headings, bold, lists)
+GIF Integration
+Search for GIFs using Giphy
+Attach GIFs to notes
+Use GIFs to represent tone (funny, serious, etc.)
 
-Artist Tracking
--Import artists from supported APIs
--Manually add artists
--Manage followed artists
+----User Flow
+User visits the site
+User signs up or logs in
+User creates a note
+User edits note content (with optional formatting)
+User optionally adds a GIF to the note
+User can share the note with another user
+Shared users can view or edit depending on permission
+User logs out and can return later to access saved notes
 
-Concert Discovery
--View upcoming concerts
--Filter concerts by location
--Search artists
+------Stretch Goals (Optional)
+Allow multiple GIFs per note
+Add simple search/filter for notes
+Improve UI styling
+Add note categories or tags
 
-Event Management
--Save events
--Remove saved events
-
-Search
--Search artists
--Search concerts
-
-User Flow
--User visits the landing page
--User signs up or logs into their account
--User imports or manually adds artists they follow
--The application retrieves upcoming concerts from external APIs
--The user views concerts happening near them
--The user saves events they want to attend
--The user manages followed artists and saved events
-
-Stretch Goals
--Support additional music platforms
--Include music festivals
--Include smaller venues and local shows
--Notify users when new concerts are announced
--Notify users when followed artists release new music
+------Breaking Down the Project (Tasks)
+1. Design Database Schema
+    Plan collections for users, notes, and sharing
+2. Set Up Backend
+    Create Express server
+    Connect MongoDB
+    Create API routes
+3. User Authentication
+    Register/login routes
+    JWT implementation
+4. Notes Functionality
+    CRUD operations for notes
+5. Sharing System
+    Add/remove shared users
+    Permission handling
+6. Frontend Setup
+    React app setup
+    Connect to backend API
+7. Markdown Rendering
+    Display formatted note content
+8. Giphy Integration
+    Search and display GIFs
+    Attach GIF to notes

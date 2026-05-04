@@ -1,0 +1,83 @@
+Capstone Project Design - Student
+Instructions
+Overview
+For your Capstone Project, you’ll build a complex database-driven Website using React, Node,
+Express and MongoDB. This website will be powered either off of an external API or an API that
+you build yourself. We encourage you to create your own API if you cannot find one with the
+data you are looking for. You can do this through web scraping, importing a CSV, or loading
+your own data into the API.
+Your finished capstone will be an integral part of your portfolio; it will demonstrate to potential
+employers everything you’ve learned from this course.
+We want you to work on a challenging project that will incorporate all of the full-stack skills
+you’ve been developing. The goal of this project isn’t to create something that’s
+never been done before but we encourage you to be ambitious. You could potentially create a
+website similar to one that already exists, and perhaps add a feature that you wish the website
+had. We encourage you to be creative when building your site. You’re free to choose any API
+you’d like to use or build your own. We encourage you to tap into your imagination throughout
+the project.
+Project Steps
+We have broken down the Capstone Project into easy-to-follow steps. Each step of the capstone
+contains a link with instructions for that step. Here’s a quick overview of what you’ll do for each
+step of your capstone project:
+Step One: Select Project Ideas
+You’ll pick up to 3 project ideas to propose to your mentor and the Springboard community.
+You’ll also explore some potential APIs.
+Step Two: Create Project Proposal
+For this step, you’ll write a proposal for the site you want to build. This will help your mentor
+better understand your chosen capstone project idea. Once you get a final approval from your
+mentor at this step, you will proceed with the following steps.
+Step Three: Plan Front-end Specifications
+Start thinking about the front-end of the application. What do you want the application to do? Do
+you want it to be more “data-driven” or “features and interactivity”. For example, a marketing
+tool’s front end will have different functionality from a “fantasy football” league. A “realtor
+application” can take different approaches. Are we querying, booking, rating realtors or mostly
+browsing through listings and video/3d models?
+Step Four: Plan Database Model
+The database model will work in tandem with your front-end. As you look back at what you are
+planning for your front-end, begin to think about what data we’ll need to store in the database.
+As an example, if we are making a “Fantasy Football App” and we need to have one team per
+user on our front-end, that means we’ll need to have a <Teams> model in our database.
+Step Five: Plan API Specifications
+As you plan the front-end functionality and how you’ll store the data in the database, think about
+how you’ll connect the two. A robust API will connect your data model to your front-end and will
+provide the functionality for your app.
+Step Six: Build, Document and Submit
+Build your web application using the Next,js frameworkCreate a README in markdown, make
+sure your GitHub is organized, and submit your finalized project.
+Example
+Let’s give you an example of what a site could look like. Say you want to make a website or
+mobile app that is like Facebook for dogs—something that would allow pet owners to connect
+with other pets in their neighborhood. First, you could load information into the application about
+various breeds of dogs, which would populate drop down lists and allow users to sort for the kind
+of dog they would like to sit. This will help users build the profile for their animal. You could add
+forms with various information about the pets. You could allow them to upload pictures (dog
+owners love nothing more than to take pictures of their animals). Most importantly, you could
+allow the pets to connect with other pets through a graph. Now let’s talk about bells and
+whistles. What if a user of your Dogbook was leaving town and wanted to find users in their
+neighborhood to watch their dog for the weekend. You could implement a geographical filtering
+and simple messaging or request system in order to help Spot find the best pet sitter. And since
+no one wants their dog watched by some kind of monster, you could implement reviews to see if
+people recommend this sitter. There are a million different features you could add! Verified
+users, so celebrities could show off their dogs. Hafthor Bjornsson, the actor who plays the
+Mountain on Game of Thrones, has an adorable pomeranian and people demand picture proof!
+You could implement an adoption system so people can give shelter pets a good home.
+Guidelines
+1. Your application should be using MERN stack, and there’s nothing stopping you from
+using additional outside libraries or services.
+2. Pay attention to the instructions for each step so that you submit the right thing. You will
+submit the link to your GitHub repo several times, this is for your mentor’s convenience.
+Your URL on GitHub is static and will not change.
+3. The first two steps require mentor approval to proceed, but after that, you are free to
+continue working on the project after you submit your work. For instance, you don’t need
+your mentor to approve your database schema before you start working on your site.
+Likewise, you don’t need your mentor to approve the first iteration of your site before you
+start polishing it.
+4. If you get stuck, there is a wealth of resources at your disposal. The course contains all
+of the material you will need to complete this project, but a well-phrased Google search
+might yield you an immediate solution to your problem. Don’t forget that your Slack
+community, TAs, and your mentor are there to help you out.
+5. Make sure you use a free API or create your own API and deploy your project on
+Render, so everyone can see your work!
+
+-----------------------------------------
+

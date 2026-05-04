@@ -1,0 +1,43 @@
+Landing Page
+↓
+Login / Register
+↓
+Dashboard (Notes List)
+↓
+Create Note
+↓
+Edit Note
+           
+1. Add GIF   2. Save   3. Share Note
+↓
+View Shared Notes
+
+
+Users
+- _id
+- username
+- email
+- password
+
+Notes
+- _id
+- title
+- content
+- owner_id
+
+SharedNotes
+- _id
+- note_id
+- user_id
+- permission
+
+NoteGIFs
+- _id
+- note_id
+- gif_url
+
+
+User → Notes (one-to-many)
+Notes → SharedNotes (one-to-many)
+Users → SharedNotes (one-to-many)
+Notes → GIFs (one-to-many)

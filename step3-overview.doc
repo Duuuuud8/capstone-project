@@ -1,0 +1,19 @@
+Plan Frontend Specifications
+After your mentor approves of your capstone project proposal, you will plan the frontend control
+flow along with User Interface components. There are many ways to plan out your frontend
+control flow, it may be tedious but planning is important as it allows us to plan our logic and
+ensure our application works in our intended manner. A good logical flow will also allow us to
+(hopefully) write more maintainable and scalable code. With a good, planned control flow we
+can split up our workload into small, manageable tasks and use our time efficiently.
+Let’s take a look back at our example, a “Facebook for Dogs (and their Owners)” take a look at
+how the very basic control flow of an application like this can be planned out:
+Example on How to Make a Flow Diagram:
+https://www.youtube.com/watch?v=cvYhuowazh0
+Example Frontend Application flow chart:
+https://drive.google.com/file/d/10IgW75PdaIi2fO0Jo43s8lAvaWUcqAQu/view?usp=sharing
+Note: You are welcome to use any popular free tools such as Figma, or StarUML or if you are
+comfortable in any other tools (Sketch, Illustrator, Photoshop) you are welcome to use them as
+well.
+Feel free to share the link with the mentor so that they can review your flow diagram. You do not
+need formal approval from your mentor to continue working on the project, but they will probably
+have advice that can help you
