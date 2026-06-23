@@ -1,0 +1,47 @@
+Application Setup - When app starts
+server.js
+  ↓
+loads .env
+  ↓
+loads app.js
+  ↓
+loads db.js
+  ↓
+connects to MongoDB
+  ↓
+starts server on PORT 3000
+
+
+
+Request Flow - When a request comes in
+client sends request
+  ↓
+app.js receives request
+  ↓
+express.json() reads the JSON body
+  ↓
+/notes route catches the request
+  ↓
+authenticateJWT middleware checks the token
+  ↓
+createNote controller handles the logic
+  ↓
+Note model talks to MongoDB
+  ↓
+MongoDB saves the note
+  ↓
+controller sends response back
+
+Auth flow
+1. models/User.js
+  1. defines what a user looks like in MongoDB
+2. controllers/authController.js
+  1. registerUser  
+  2. loginUser
+3. routes/authRoutes.js
+  1. POST /register  
+  2. POST /login
+4. middlewares/authMiddleware.js
+  1. protects private routes later
+5. app.js mounts /auth
+  1. mounts auth routes with app.use("/auth", authRoutes)
