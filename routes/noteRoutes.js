@@ -16,7 +16,13 @@ router.patch(
     "/:id/share",
     authMiddleware,
     shareNote
-)
+);
+
+// router.get(
+//     "notes/shared,
+//     authMiddleware,
+//     sharedNote
+// ) 
 
 router.get(
     "/",

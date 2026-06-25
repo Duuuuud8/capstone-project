@@ -48,13 +48,15 @@ describe("Note Routes", () => {
                                 .set("Authorization", `Bearer ${token}`)
                                 .send({
                                     title: "Grocery List",
-                                    content: "q-tips"
+                                    content: "q-tips",
+                                    mood: "💪"
                                 });
             expect(res.status).to.equal(201);
             expect(res.body.message).to.equal("Note created successfully");
             expect(res.body.note).to.have.property("_id");
             expect(res.body.note.title).to.equal("Grocery List");
             expect(res.body.note.content).to.equal("q-tips");
+            expect(res.body.note.mood).to.equal("💪");
         });
     });
 
@@ -86,24 +88,25 @@ describe("Note Routes", () => {
                                 .set("Authorization", `Bearer ${token}`)
                                 .send({
                                     title: "Grocery List",
-                                    content: "q-tips"
+                                    content: "q-tips",
+                                    mood: "💪"
                                 });
             const noteId = noteRes.body.note._id;
             const res = await request(app)
                                 .patch(`/notes/${noteId}`)
                                 .set("Authorization", `Bearer ${token}`)
                                 .send({
-                                    content: "New note"
+                                    content: "New note",
+                                    mood: "🔥"
                                 });
 
             expect(res.status).to.equal(200);
             expect(res.body.message).to.equal("Note updated successfully");
             expect(res.body.note.title).to.equal("Grocery List");
             expect(res.body.note.content).to.equal("New note");
+            expect(res.body.note.mood).to.equal("🔥");
         });
-    });
 
-    describe("PATCH /notes/:id", () => {
         it("Should not let user update someone else's note", async () => {
             const noteRes = await request(app)
                                 .post("/notes")
@@ -131,10 +134,182 @@ describe("Note Routes", () => {
                                 });
 
             expect(res.status).to.equal(403);
-            expect(res.body.error).to.equal("You can only update your own notes.");
+            expect(res.body.error).to.equal("You do not have permission to edit this note.");
         });
     });
 
+// =================================
+// shareNote Tests
+
+describe("PATCH /notes/:id/share", () => {
+    it("Should allow owner to share a note with another user", async () => {
+      const noteRes = await request(app)
+        .post("/notes")
+        .set("Authorization", `Bearer ${token}`)
+        .send({
+          title: "Shared Note",
+          content: "This is shared content",
+        });
+
+      const noteId = noteRes.body.note._id;
+
+      const secondUser = await request(app)
+        .post("/auth/register")
+        .send({
+          username: "vieweruser",
+          email: "viewer@test.com",
+          password: "password123",
+        });
+
+        const secondUserFromDb = await User.findOne({ email: "viewer@test.com" });
+        const secondUserId = secondUserFromDb._id;
+
+      const res = await request(app)
+        .patch(`/notes/${noteId}/share`)
+        .set("Authorization", `Bearer ${token}`)
+        .send({
+          userId: secondUserId,
+          permission: "view",
+        });
+
+      expect(res.status).to.equal(200);
+      expect(res.body.message).to.equal("Note shared successfully.");
+      expect(res.body.note.sharedWith.length).to.equal(1);
+      expect(res.body.note.sharedWith[0].permission).to.equal("view");
+    });
+
+    it("Should allow shared viewer to view the note", async () => {
+      const noteRes = await request(app)
+        .post("/notes")
+        .set("Authorization", `Bearer ${token}`)
+        .send({
+          title: "Viewer Note",
+          content: "Viewer can read this",
+        });
+
+      const noteId = noteRes.body.note._id;
+
+      const secondUser = await request(app)
+        .post("/auth/register")
+        .send({
+          username: "vieweruser",
+          email: "viewer@test.com",
+          password: "password123",
+        });
+
+        const secondUserFromDb = await User.findOne({ email: "viewer@test.com" });
+        const secondUserId = secondUserFromDb._id;
+      
+      const secondToken = secondUser.body.token;
+
+      await request(app)
+        .patch(`/notes/${noteId}/share`)
+        .set("Authorization", `Bearer ${token}`)
+        .send({
+          userId: secondUserId,
+          permission: "view",
+        });
+
+      const res = await request(app)
+        .get("/notes")
+        .set("Authorization", `Bearer ${secondToken}`);
+
+      expect(res.status).to.equal(200);
+      expect(res.body.notes).to.be.an("array");
+      expect(res.body.notes.length).to.equal(1);
+      expect(res.body.notes[0].title).to.equal("Viewer Note");
+      expect(res.body.notes[0].content).to.equal("Viewer can read this");
+    });
+
+    it("Should not allow shared viewer to edit the note", async () => {
+      const noteRes = await request(app)
+        .post("/notes")
+        .set("Authorization", `Bearer ${token}`)
+        .send({
+          title: "Viewer Cannot Edit",
+          content: "Original content",
+        });
+
+      const noteId = noteRes.body.note._id;
+
+      const secondUser = await request(app)
+        .post("/auth/register")
+        .send({
+          username: "vieweruser",
+          email: "viewer@test.com",
+          password: "password123",
+        });
+
+        const secondUserFromDb = await User.findOne({ email: "viewer@test.com" });
+        const secondUserId = secondUserFromDb._id;
+      const secondToken = secondUser.body.token;
+
+      await request(app)
+        .patch(`/notes/${noteId}/share`)
+        .set("Authorization", `Bearer ${token}`)
+        .send({
+          userId: secondUserId,
+          permission: "view",
+        });
+
+      const res = await request(app)
+        .patch(`/notes/${noteId}`)
+        .set("Authorization", `Bearer ${secondToken}`)
+        .send({
+          content: "Viewer tried to edit",
+        });
+
+      expect(res.status).to.equal(403);
+      expect(res.body.error).to.equal(
+        "You do not have permission to edit this note."
+      );
+    });
+
+    it("Should allow shared editor to edit the note", async () => {
+      const noteRes = await request(app)
+        .post("/notes")
+        .set("Authorization", `Bearer ${token}`)
+        .send({
+          title: "Editor Can Edit",
+          content: "Original content",
+        });
+
+      const noteId = noteRes.body.note._id;
+
+      const secondUser = await request(app)
+        .post("/auth/register")
+        .send({
+          username: "editoruser",
+          email: "editor@test.com",
+          password: "password123",
+        });
+
+        const secondUserFromDb = await User.findOne({ email: "editor@test.com" });
+        const secondUserId = secondUserFromDb._id;
+      const secondToken = secondUser.body.token;
+
+      await request(app)
+        .patch(`/notes/${noteId}/share`)
+        .set("Authorization", `Bearer ${token}`)
+        .send({
+          userId: secondUserId,
+          permission: "edit",
+        });
+
+      const res = await request(app)
+        .patch(`/notes/${noteId}`)
+        .set("Authorization", `Bearer ${secondToken}`)
+        .send({
+          content: "Editor updated this",
+        });
+
+      expect(res.status).to.equal(200);
+      expect(res.body.message).to.equal("Note updated successfully");
+      expect(res.body.note.content).to.equal("Editor updated this");
+    });
+  });
+
+// =================================
     describe("DELETE /notes/:id", () => {
         it("Should allow owner to delete notes", async () => {
             const noteRes = await request(app)
@@ -157,9 +332,7 @@ describe("Note Routes", () => {
 
             expect(deletedNote).to.equal(null);
         });
-    });
 
-    describe("DELETE /notes/:id", () => {
         it("Should not let user delete someone else's note", async () => {
             const noteRes = await request(app)
                                 .post("/notes")

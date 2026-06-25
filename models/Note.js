@@ -24,7 +24,7 @@ const noteSchema = new mongoose.Schema({
         },
         permission: {
             type: String,
-            enum: [view, edit]
+            enum: [ "view", "edit" ]
         }
     }],
 
@@ -32,6 +32,11 @@ const noteSchema = new mongoose.Schema({
         type: String,
         enum: [ "private", "public-view", "public-edit"],
         default: "private"
+    }, 
+
+    mood: {
+        type: String,
+        default: "📝"
     }
 }, {
     timestamps: true

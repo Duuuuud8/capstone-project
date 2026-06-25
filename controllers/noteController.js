@@ -3,10 +3,11 @@ const Note = require("../models/Note");
 
 const createNote = async (req, res) => {
     try{
-        const { title, content } = req.body;
+        const { title, content, mood } = req.body;
         const newNote = await Note.create({
             title,
             content,
+            mood,
             owner: req.user.id || req.user._id
         });
         return res.status(201).json({
@@ -144,13 +145,16 @@ const updateNote = async (req, res) => {
             });
         }
 
-        const { title, content } = req.body;
+        const { title, content, mood } = req.body;
             // fields to be updated
         if (title !== undefined) {
             note.title = title;
         }
         if (content !== undefined) {
             note.content = content;
+        }
+        if (mood !== undefined) {
+            note.mood = mood;
         }
         
         await note.save();
