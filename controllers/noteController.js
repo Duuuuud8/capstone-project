@@ -1,4 +1,5 @@
 const Note = require("../models/Note");
+const User = require("../models/User");
 
 
 const createNote = async (req, res) => {
@@ -23,7 +24,7 @@ const createNote = async (req, res) => {
 
 const shareNote = async (req, res) => {
     try{
-        const { userId, permission } = req.body;
+        const { login, permission } = req.body;
         const note = await Note.findById(req.params.id);
 
         if(!note) {
@@ -44,15 +45,28 @@ const shareNote = async (req, res) => {
             });
         }
 
+        const userToShareWith = await User.findOne({ 
+            $or: [
+                {username: login },
+                {email: login.toLowerCase()}
+            ] 
+        });
+
+        if (!userToShareWith) {
+            return res.status(404).json({
+                error: "User not found."
+            });
+        }
+
         const existingShare = note.sharedWith.find(
-            share => share.user.toString() === userId
+            share => share.user.toString() === userToShareWith._id.toString()
         );
 
         if(existingShare) {
             existingShare.permission = permission;
         } else {
             note.sharedWith.push({
-                user: userId,
+                user: userToShareWith._id,
                 permission
             });
         }

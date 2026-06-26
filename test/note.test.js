@@ -168,7 +168,7 @@ describe("PATCH /notes/:id/share", () => {
         .patch(`/notes/${noteId}/share`)
         .set("Authorization", `Bearer ${token}`)
         .send({
-          userId: secondUserId,
+          login: "viewer@test.com",
           permission: "view",
         });
 
@@ -206,7 +206,7 @@ describe("PATCH /notes/:id/share", () => {
         .patch(`/notes/${noteId}/share`)
         .set("Authorization", `Bearer ${token}`)
         .send({
-          userId: secondUserId,
+          login: "viewer@test.com",
           permission: "view",
         });
 
@@ -248,7 +248,7 @@ describe("PATCH /notes/:id/share", () => {
         .patch(`/notes/${noteId}/share`)
         .set("Authorization", `Bearer ${token}`)
         .send({
-          userId: secondUserId,
+          login: "viewer@test.com",
           permission: "view",
         });
 
@@ -292,7 +292,7 @@ describe("PATCH /notes/:id/share", () => {
         .patch(`/notes/${noteId}/share`)
         .set("Authorization", `Bearer ${token}`)
         .send({
-          userId: secondUserId,
+          login: "editor@test.com",
           permission: "edit",
         });
 
