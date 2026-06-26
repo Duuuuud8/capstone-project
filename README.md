@@ -183,7 +183,7 @@ Request Body
 
 ```json
 {
-  "userId": "<user_id>",
+  "login": "<user_id>",
   "permission": "view"
 }
 ```
@@ -192,7 +192,7 @@ or
 
 ```json
 {
-  "userId": "<user_id>",
+  "login": "<user_id>",
   "permission": "edit"
 }
 ```

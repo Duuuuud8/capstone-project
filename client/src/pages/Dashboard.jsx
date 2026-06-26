@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import API from "../api";
-import ReactMarkdown from "react-router-dom";
+import ReactMarkdown from "react-markdown";
 
 
 function Dashboard() {
